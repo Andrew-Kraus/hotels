@@ -32,7 +32,7 @@ function* fetchHotelsWorker() {
     }));
     const checkIn = dataCheckIn(date);
     const checkOut = datePlus(date, days);
-    const url = `http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${checkIn}&checkOut=${checkOut}&limit=10`;
+    const url = `https://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${checkIn}&checkOut=${checkOut}&limit=10`;
     const data = yield call(() => fetch(url).then(res => res.json()));
     yield put(setHotels(data));
     yield put(setFinalDays(days));
