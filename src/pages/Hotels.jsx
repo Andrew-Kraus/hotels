@@ -19,7 +19,7 @@ const Hotels = (props) => {
     const finalDays = useSelector(state => state.finalDays);
     const finalDate = useSelector(state => state.finalDate);
     const finalLocation = useSelector(state => state.finalLocation);
-    const date = useSelector(state => state.date);
+    const datePicker = new Date().toISOString().split('T')[0]
 
     useEffect(() => {
         dispatch(fetchHotels())
@@ -124,7 +124,7 @@ const Hotels = (props) => {
                         </div>
                         <div className='hotels__input-container'>
                             <h3 className='hotels__input-title'>Дата заселения</h3>
-                            <input type='date' className='hotels__input' value={date.toISOString().split('T')[0]} onChange={(e) => dispatch({ type: 'SET_DATE', payload: e.target.value })} />
+                            <input type='date' className='hotels__input' defaultValue={datePicker} onChange={(e) => dispatch({ type: 'SET_DATE', payload: e.target.value })} />
                         </div>
                         <div className='hotels__input-container'>
                             <h3 className='hotels__input-title'>Количество дней</h3>
