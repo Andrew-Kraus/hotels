@@ -19,6 +19,7 @@ const Hotels = (props) => {
     const finalDays = useSelector(state => state.finalDays);
     const finalDate = useSelector(state => state.finalDate);
     const finalLocation = useSelector(state => state.finalLocation);
+    const date = useSelector(state => state.date);
 
     useEffect(() => {
         dispatch(fetchHotels())
@@ -108,7 +109,7 @@ const Hotels = (props) => {
     return (
         <div className='hotels'>
             <header className='hotels__header'>
-                <h1 className='hotels__title' onClick={() => dispatch(fetchHotels())}>Simple Hotel Check</h1>
+                <h1 className='hotels__title'>Simple Hotel Check</h1>
                 <div className='hotels__logout' onClick={() => logOut()}>
                     <p className='hotels__logout-text'>Выйти</p>
                     <img className='hoteks__logout-icon' src='log-out.png' alt='Изображение не загрузилось' />
@@ -118,12 +119,12 @@ const Hotels = (props) => {
                 <div className='hotels__info-container'>
                     <div className='hotels__search'>
                         <div className='hotels__input-container'>
-                            <h3 className='hotels__input-title' onClick={() => console.log(hotels)}>Локация</h3>
+                            <h3 className='hotels__input-title'>Локация</h3>
                             <input className='hotels__input' placeholder='Москва' onChange={(e) => dispatch({ type: 'SET_LOCATION', payload: e.target.value })} />
                         </div>
                         <div className='hotels__input-container'>
                             <h3 className='hotels__input-title'>Дата заселения</h3>
-                            <input type='date' className='hotels__input' onChange={(e) => dispatch({ type: 'SET_DATE', payload: e.target.value })} />
+                            <input type='date' className='hotels__input' value={date.toISOString().split('T')[0]} onChange={(e) => dispatch({ type: 'SET_DATE', payload: e.target.value })} />
                         </div>
                         <div className='hotels__input-container'>
                             <h3 className='hotels__input-title'>Количество дней</h3>
