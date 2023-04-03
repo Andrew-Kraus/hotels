@@ -10,7 +10,6 @@
     }
 }
 
-
 @mixin container($w, $p) {
     display: flex;
     flex-direction: column;
@@ -156,6 +155,7 @@ body {
 
 .auth__button {
     @include button(345px);
+    margin-top: 30px;
 }
 
 .hotels__header {

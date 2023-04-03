@@ -5,8 +5,12 @@ import { setFinalLocation } from '../store/finalLocationReducer';
 import { setHotels } from '../store/hotelsReducer';
 
 function datePlus(date, days) {
-    if (JSON.stringify(date).length < 13) {
+    if (JSON.stringify(date).length < 13 && date) {
         const newDate = new Date(date);
+        newDate.setDate(newDate.getDate() + days);
+        return newDate.toISOString().split('T')[0];
+    } if (!date) {
+        const newDate = new Date();
         newDate.setDate(newDate.getDate() + days);
         return newDate.toISOString().split('T')[0];
     } else {
@@ -17,8 +21,11 @@ function datePlus(date, days) {
 }
 
 function dataCheckIn(date) {
-    if (JSON.stringify(date).length < 13) {
+    if (JSON.stringify(date).length < 13 && date) {
         return date;
+    } if (!date) {
+        const newDate = new Date();
+        return newDate.toISOString().split('T')[0];
     } else {
         return date.toISOString().split('T')[0];
     }
@@ -36,7 +43,7 @@ function* fetchHotelsWorker() {
     const data = yield call(() => fetch(url).then(res => res.json()));
     yield put(setHotels(data));
     yield put(setFinalDays(days));
-    yield put(setFinalDate(date));
+    yield put(setFinalDate(checkIn));
     yield put(setFinalLocation(location));
 }
 

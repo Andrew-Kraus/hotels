@@ -105,6 +105,14 @@ const Hotels = (props) => {
         }
     }
 
+    function checkNumber(number) {
+        if (!isNaN(number) && number > 0) {
+            dispatch({ type: 'SET_DAYS', payload: number })
+        } else {
+            dispatch({ type: 'SET_DAYS', payload: 1 })
+        }
+    }
+
 
     return (
         <div className='hotels'>
@@ -124,11 +132,11 @@ const Hotels = (props) => {
                         </div>
                         <div className='hotels__input-container'>
                             <h3 className='hotels__input-title'>Дата заселения</h3>
-                            <input type='date' className='hotels__input' defaultValue={datePicker} onChange={(e) => dispatch({ type: 'SET_DATE', payload: e.target.value })} />
+                            <input type='date' className='hotels__input' defaultValue={datePicker} min={datePicker} onChange={(e) => dispatch({ type: 'SET_DATE', payload: e.target.value })} />
                         </div>
                         <div className='hotels__input-container'>
                             <h3 className='hotels__input-title'>Количество дней</h3>
-                            <input className='hotels__input' placeholder='1' onChange={(e) => dispatch({ type: 'SET_DAYS', payload: Number(e.target.value) })} />
+                            <input className='hotels__input' placeholder='1' onChange={(e) => checkNumber(Number(e.target.value))} />
                         </div>
                         <button className='hotels__search-button' onClick={() => dispatch(fetchHotels())}>Найти</button>
                     </div>
